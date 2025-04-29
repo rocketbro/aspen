@@ -1,0 +1,28 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+Summary of what we've done so far:
+Project Goal: Build 'Aspen', a local-first AI agent for developer workflows, inspired by codex-cli and agent design best practices. [Read more](mdc:README.md)
+Tech Stack: Decided on a Python backend (using FastAPI and LangChain) and a React frontend (to be built later).
+Local LLM: Chose Ollama for managing and serving local models, starting with qwen3:8b (released today!).
+
+Backend Setup:
+Created the aspen_backend directory.
+Initialized a Python project using uv.
+Installed necessary dependencies (fastapi, uvicorn, langchain, langchain-ollama, etc.).
+Set up a basic FastAPI application (src/main.py).
+Fixed a LangChainDeprecationWarning by installing and using langchain-ollama.
+
+Tool Implementation:
+Created initial read-only tools (FileReadTool, ListDirectoryTool, GrepTool) in src/tools/file_system_tools.py.
+Fixed a PydanticUserError by adding type annotations to tool attributes.
+
+Agent Integration:
+Integrated the tools and the Ollama LLM into a LangChain ReAct agent using create_react_agent and AgentExecutor.
+Pulled a standard ReAct prompt (hwchase17/react) from langchain.hub.
+Created an /agent_chat endpoint in FastAPI to interact with the agent.
+Fixed a NameError related to incorrect prompt setup.
+
+The backend is now runnable and provides an agent capable of using the file system tools via the /agent_chat endpoint.
