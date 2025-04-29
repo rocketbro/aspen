@@ -1,0 +1,11 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+[main.py](mdc:aspen_backend/main.py) This is meant to be a succesful implementation of the LangGraph agent framework outlined below.
+
+Here are some helpful links (use your web tool to open these):
+LangGraph page: @https://langchain-ai.github.io/langgraph/concepts/high_level/
+LangChain guide for building modern agents: @https://python.langchain.com/docs/tutorials/agents/ 
+create_react_agent docs: @https://langchain-ai.github.io/langgraph/reference/prebuilt/#langgraph.prebuilt.chat_agent_executor.create_react_agent 
