@@ -8,6 +8,9 @@ from langchain import hub
 # Import our tools
 from src.tools.file_system_tools import FileReadTool, ListDirectoryTool, GrepTool
 
+# --- Global State for Thinking Mode ---
+enable_thinking_mode = False  # Default to True as per Qwen3 docs
+
 # Define the request body model
 class ChatRequest(BaseModel):
     message: str
@@ -35,6 +38,14 @@ agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
 
 app = FastAPI(title="Aspen Backend")
 
+# --- Thinking Mode Toggle Endpoint ---
+@app.post("/toggle_thinking_mode")
+def toggle_thinking():
+    """Toggles the Qwen3 thinking mode (/think, /no_think)."""
+    global enable_thinking_mode
+    enable_thinking_mode = not enable_thinking_mode
+    return {"message": f"Thinking mode set to: {enable_thinking_mode}"}
+
 
 @app.get("/")
 def read_root():
@@ -50,11 +61,16 @@ def health_check():
 @app.post("/agent_chat")
 async def agent_chat_endpoint(request: ChatRequest):
     """Receives a message and uses the agent executor to respond."""
+    global enable_thinking_mode
     try:
+        # Prepend command based on thinking mode state
+        prefix = "/think " if enable_thinking_mode else "/no_think "
+        modified_message = prefix + request.message
+
         # Use agent_executor.ainvoke for asynchronous execution
         # Hub prompt typically expects 'input' and handles intermediate steps
         response = await agent_executor.ainvoke({
-            "input": request.message,
+            "input": modified_message,
             # Removed explicit passing of tools/agent_scratchpad
         })
         # The final answer is usually in the 'output' key
