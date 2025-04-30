@@ -55,14 +55,17 @@ I am not sure what the most optimal configuration here will be, but my first ide
 
 Currently the project is very empty. I have some very helpful research though:
 
-1. [codex-cli](research/codex): an open source CLI agent that OpenAI released
-2. [A Practical Guide to Building Agents](research/practical-guide-to-building-agents.md): an overview of how to build an agent, also by OpenAI
-3. **Very valuable**: [System prompts from all leading AI agents](research/system-prompts-and-models-of-ai-tools): a directory containing the current system prompts for all leading AI agents, organized by the tool name or model name. this will be hugely helpful for quickly designing a very effective system prompt for Aspen.
+1. [codex-cli](mdc:research/codex): an open source CLI agent that OpenAI released
+2. [A Practical Guide to Building Agents](mdc:research/practical-guide-to-building-agents.md): an overview of how to build an agent, also by OpenAI
+3. **Very valuable**: [System prompts from all leading AI agents](mdc:research/system-prompts-and-models-of-ai-tools): a directory containing the current system prompts for all leading AI agents, organized by the tool name or model name. this will be hugely helpful for quickly designing a very effective system prompt for Aspen.
+4. @research/claude-ai: Lots of screenshots and stylesheets to help us build a really clean frontend right off the bat
 
 We will be using these as a guide to build Aspen.
 
-## Current Tasks
-1. Define a core implementation plan
-2. Decide on a tech stack
-3. Start building an MVP
+## Stack
+- Model: Qwen 3 series (just released)
+- Agent framework: CrewAI
+- Python manager: uv
+- Frontend: Next.js (to be run locally)
+- Backend: Python server
 
